@@ -291,7 +291,7 @@ class App:
     def do_undo(self):
         if self.mode not in ("play", "gameover"):
             return
-        steps = 2 if self.state.current_player == self.human_player else 1
+        steps = 4 if self.state.current_player == self.human_player else 3
         moved = False
         for _ in range(steps):
             if self.current_node.parent is not None:

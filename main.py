@@ -336,6 +336,16 @@ class App:
                 self.message = "Reprodukcija zavrsena."
                 self._refresh_available()
 
+    def start_replay_all(self):
+        path = collect_chronological(self.root)
+        if not path:
+            return
+        self.replay_list = path
+        self.replay_idx = 0
+        self.mode = "replay"
+        self.replay_last_time = time.time()
+        self.message = "Reprodukcija cele istorije u toku..."
+
     def run(self):
         running = True
         while running:
@@ -354,7 +364,7 @@ class App:
                         self.do_undo()
                         continue
                     if self.btn_replay.collidepoint(mx, my):
-                        self.start_replay()
+                        self.start_replay_all()
                         continue
                     if mx < BOARD_PX and self.mode == "play":
                         self.handle_board_click(mx, my)
